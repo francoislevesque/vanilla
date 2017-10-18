@@ -891,14 +891,15 @@ if (c('Garden.Registration.CaptchaPublicKey')) {
     removeFromConfig('Garden.Registration.CaptchaPublicKey');
 }
 
+// Remove Charset from inf.
+if (c('Database.CharacterEncoding') !== 'utf8mb4') {
+    removeFromConfig('Database.CharacterEncoding');
+    removeFromConfig('Database.ExtendedProperties.Collate');
+}
+
 // Make sure the smarty folders exist.
 touchFolder(PATH_CACHE.'/Smarty/cache');
 touchFolder(PATH_CACHE.'/Smarty/compile');
-
-// Lock the current database character Encoding
-saveToConfig('Database.CharacterEncoding', c('Database.CharacterEncoding'));
-saveToConfig('Database.ExtendedProperties.Collate', c('Database.ExtendedProperties.Collate'));
-
 
 // For Touch Icon
 if (c('Plugins.TouchIcon.Uploaded')) {

@@ -27,6 +27,9 @@ class DiscussionModel extends Gdn_Model {
     /** @var string The filter key for clearing-type filters. */
     const EMPTY_FILTER_KEY = 'none';
 
+    /** Max comments on a discussion before it cannot be auto-deleted by SPAM or moderation actions. */
+    const DELETE_COMMENT_THRESHOLD = 10;
+
     /** @var array|bool */
     private static $categoryPermissions = null;
 
@@ -3074,7 +3077,7 @@ class DiscussionModel extends Gdn_Model {
      */
     public static function addFilterSet($setKey, $setName = '', $categoryIDs = []) {
         if (!$setName) {
-            $setName = sprintf(t('All %s'), t('Discussions'));
+            $setName = t('All Discussions');
         }
         self::$allowedFilters[$setKey]['key'] = $setKey;
         self::$allowedFilters[$setKey]['name'] = $setName;
