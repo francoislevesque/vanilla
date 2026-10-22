@@ -13,7 +13,7 @@ use Vanilla\Utility\CamelCaseScheme;
 /**
  * Shim class used for backward compatibility.
  */
-class VanillaMailer extends \PHPMailer {
+class VanillaMailer extends \PHPMailer\PHPMailer\PHPMailer {
 
     /**
      * Either set or get the value of "throwExceptions".
@@ -65,7 +65,7 @@ class VanillaMailer extends \PHPMailer {
      * a server error instead of a "critical" error.
      * Server error means that we can try to resend the email.
      */
-    public function isServerError(\phpmailerException $e) {
+    public function isServerError(\PHPMailer\PHPMailer\Exception $e) {
         $serverErrorMessages = [
             'connect_host',
             'data_not_accepted',

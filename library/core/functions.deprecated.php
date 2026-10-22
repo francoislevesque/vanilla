@@ -737,22 +737,12 @@ if (!function_exists('safeRedirect')) {
 }
 
 if (!function_exists('trueStripSlashes')) {
-    if (get_magic_quotes_gpc()) {
-        /**
-         * @deprecated
-         */
-        function trueStripSlashes($string) {
-            deprecated('trueStripSlashes()');
-            return stripslashes($string);
-        }
-    } else {
-        /**
-         * @deprecated
-         */
-        function trueStripSlashes($string) {
-            deprecated('trueStripSlashes()');
-            return $string;
-        }
+    /**
+     * @deprecated
+     */
+    function trueStripSlashes($string) {
+        deprecated('trueStripSlashes()');
+        return $string;
     }
 }
 

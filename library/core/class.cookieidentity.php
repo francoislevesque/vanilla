@@ -12,6 +12,7 @@
  */
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 /**
  * Validating, Setting, and Retrieving session data in cookies.
@@ -249,7 +250,7 @@ class Gdn_CookieIdentity {
         Gdn::pluginManager()
             ->fireAs(self::class)
             ->fireEvent('setIdentity', ['payload' => &$payload]);
-        $jwt = JWT::encode($payload, $this->CookieSalt, self::JWT_ALGORITHM);
+        $jwt = JWT::encode($payload, $this->getJWTKey(), self::JWT_ALGORITHM);
 
         // Save the cookie.
         safeCookie($this->CookieName, $jwt, $expiry, $this->CookiePath, $this->CookieDomain, null, true);
@@ -421,6 +422,17 @@ class Gdn_CookieIdentity {
     }
 
     /**
+     * Get the key used to sign JWT cookies.
+     *
+     * The cookie salt is too short for HS256, so derive a 32 byte key from it.
+     *
+     * @return string
+     */
+    private function getJWTKey() {
+        return hash('sha256', $this->CookieSalt, true);
+    }
+
+    /**
      * Attempt to decode a JWT payload from a cookie value.
      *
      * @param string $name Name of the cookie holding a JWT token.
@@ -432,7 +444,7 @@ class Gdn_CookieIdentity {
         if (array_key_exists($name, $_COOKIE)) {
             $jwt = $_COOKIE[$name];
             try {
-                $payload = JWT::decode($jwt, $this->CookieSalt, [self::JWT_ALGORITHM]);
+                $payload = JWT::decode($jwt, new Key($this->getJWTKey(), self::JWT_ALGORITHM));
                 if (is_object($payload)) {
                     $result = (array)$payload;
                 }

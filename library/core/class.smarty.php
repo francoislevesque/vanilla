@@ -111,7 +111,6 @@ class Gdn_Smarty {
 
         $security = new SmartySecurityVanilla($smarty);
 
-        $security->php_handling = Smarty::PHP_REMOVE;
         $security->allow_constants = false;
         $security->allow_super_globals = false;
         $security->streams = null;
@@ -168,7 +167,7 @@ class Gdn_Smarty {
      */
     public function smarty() {
         if (is_null($this->_Smarty)) {
-            $smarty = new SmartyBC();
+            $smarty = new Smarty();
 
             $smarty->setCacheDir(PATH_CACHE.'/Smarty/cache');
             $smarty->setCompileDir(PATH_CACHE.'/Smarty/compile');

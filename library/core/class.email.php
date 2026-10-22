@@ -19,7 +19,7 @@ class Gdn_Email extends Gdn_Pluggable {
     /** Error: The email was not attempted to be sent.. */
     const ERR_SKIPPED = 1;
 
-    /** @var PHPMailer */
+    /** @var \Vanilla\VanillaMailer */
     public $PhpMailer;
 
     /** @var boolean */

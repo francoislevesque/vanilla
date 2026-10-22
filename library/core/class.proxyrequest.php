@@ -639,7 +639,7 @@ class ProxyRequest {
         }
 
         for ($i = 0; $i < strlen($class); $i++) {
-            if ($class{$i} != 'x' && $class{$i} != $code{$i}) {
+            if ($class[$i] != 'x' && $class[$i] != $code[$i]) {
                 return false;
             }
         }

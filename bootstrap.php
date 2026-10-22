@@ -30,6 +30,9 @@ $dic->setInstance('Garden\Container\Container', $dic)
     ->rule('Interop\Container\ContainerInterface')
     ->setAliasOf('Garden\Container\Container')
 
+    ->rule(\Psr\Container\ContainerInterface::class)
+    ->setAliasOf('Garden\Container\Container')
+
     ->rule(InjectableInterface::class)
     ->addCall('setDependencies')
 

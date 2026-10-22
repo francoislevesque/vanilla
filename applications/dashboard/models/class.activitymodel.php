@@ -893,8 +893,8 @@ class ActivityModel extends Gdn_Model {
                     } else {
                         $Emailed = self::SENT_SKIPPED;
                     }
-                } catch (phpmailerException $pex) {
-                    if ($pex->getCode() == PHPMailer::STOP_CRITICAL && !$Email->PhpMailer->isServerError($pex)) {
+                } catch (\PHPMailer\PHPMailer\Exception $pex) {
+                    if ($pex->getCode() == \PHPMailer\PHPMailer\PHPMailer::STOP_CRITICAL && !$Email->PhpMailer->isServerError($pex)) {
                         $Emailed = self::SENT_FAIL;
                     } else {
                         $Emailed = self::SENT_ERROR;
@@ -1027,8 +1027,8 @@ class ActivityModel extends Gdn_Model {
                     $activity['_Delete'] = true;
                 }
             }
-        } catch (phpmailerException $pex) {
-            if ($pex->getCode() == PHPMailer::STOP_CRITICAL && !$email->PhpMailer->isServerError($pex)) {
+        } catch (\PHPMailer\PHPMailer\Exception $pex) {
+            if ($pex->getCode() == \PHPMailer\PHPMailer\PHPMailer::STOP_CRITICAL && !$email->PhpMailer->isServerError($pex)) {
                 $emailed = self::SENT_FAIL;
             } else {
                 $emailed = self::SENT_ERROR;
@@ -1173,8 +1173,8 @@ class ActivityModel extends Gdn_Model {
                         } else {
                             $emailed = self::SENT_SKIPPED;
                         }
-                    } catch (phpmailerException $pex) {
-                        if ($pex->getCode() == PHPMailer::STOP_CRITICAL && !$email->PhpMailer->isServerError($pex)) {
+                    } catch (\PHPMailer\PHPMailer\Exception $pex) {
+                        if ($pex->getCode() == \PHPMailer\PHPMailer\PHPMailer::STOP_CRITICAL && !$email->PhpMailer->isServerError($pex)) {
                             $emailed = self::SENT_FAIL;
                         } else {
                             $emailed = self::SENT_ERROR;
